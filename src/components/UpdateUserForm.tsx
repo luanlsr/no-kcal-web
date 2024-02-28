@@ -90,6 +90,7 @@ const UpdateUserForm = () => {
                     render={({ field }: any) => (
                       <input
                         {...field}
+                        type="date"
                         className="border rounded-md py-2 px-3 w-full"
                         value={moment(field.value).format('YYYY-MM-DD')}
                       />

@@ -5,6 +5,7 @@ import Button from "./Button";
 import { closeModal } from '../redux/reducers/modalReducer';
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import PhoneNumberInput from "./PhoneNumberMask";
 
 const CreateUserForm = () => {
   const [formData, setFormData] = useState({
@@ -114,7 +115,13 @@ const CreateUserForm = () => {
                 </div>
                 <div className="w-1/2 pl-2">
                   <label htmlFor="phone" className="block text-gray-700 text-sm font-bold mb-2">Telefone</label>
-                  <Field type="text" id="phone" name="phone" className="border rounded-md py-2 px-3 w-full" />
+                  <Field type="text" id="phone" name="phone" className="border rounded-md py-2 px-3 w-full"
+                    render={({ field }: any) => (
+                      <PhoneNumberInput
+                        value={field.value}
+                        onChange={field.onChange} />
+                    )}
+                  />
                 </div>
               </div>
               <div className="flex mb-4">

@@ -37,37 +37,39 @@ export default function Ranking() {
       {/* <NavbarComponent activeMenu={activeMenu} onMenuChange={(menu) => setActiveMenu(menu)} /> */}
 
       <div className="flex flex-col items-center justify-center mx-auto pt-8 pb-8">
-        <h1 className="text-4xl font-bold mb-4">RANKING</h1>
-        {usersMap.map((user, userIndex) => (
-          <div key={userIndex} className={`max-w-5xl mx-auto mb-4 mt-4 p-4 rounded-lg shadow-md ${getCardStyle(userIndex)} lg:w-full`}>
-            <div className="flex flex-col lg:flex-row items-center justify-between mb-4">
-              <img src={user.photo} alt={`${user.name} ${user.lastname}`} className="rounded-full w-40 h-40 mb-4 lg:mr-4 lg:mb-0" />
-              <div className="flex flex-col lg:flex-row items-center lg:justify-between flex-grow ">
-                <div className="lg:mr-8 text-2xl">
-                  <div className="mb-2">
-                    <strong>{`${user.name} ${user.lastname}`}</strong>
+        <h1 className="text-4xl font-bold mb-4">📉 RANKING 📈</h1>
+        {usersMap
+
+          .map((user, userIndex) => (
+            <div key={userIndex} className={`max-w-5xl mx-auto mb-4 mt-4 p-4 rounded-lg shadow-md ${getCardStyle(userIndex)} lg:w-full`}>
+              <div className="flex flex-col lg:flex-row items-center justify-between mb-4">
+                <img src={user.photo} alt={`${user.name} ${user.lastname}`} className="rounded-full w-40 h-40 mb-4 lg:mr-4 lg:mb-0" />
+                <div className="flex flex-col lg:flex-row items-center lg:justify-between flex-grow ">
+                  <div className="lg:mr-8 text-2xl">
+                    <div className="mb-2">
+                      <strong>{`${user.name} ${user.lastname}`}</strong>
+                    </div>
+                    <div>{`Setor: ${user.sector}`}</div>
+                    <div>{`Telefone: ${user.phone}`}</div>
+                    <div className="lg:w-80">Percentual de Gordura perdido: {user.ranking.monthlyPoints * 0.01}%</div>
                   </div>
-                  <div>{`Setor: ${user.sector}`}</div>
-                  <div>{`Telefone: ${user.phone}`}</div>
-                  <div className="lg:w-80">Percentual de Gordura perdido: {user.ranking.monthlyPoints * 0.01}%</div>
-                </div>
-                <div className="lg:ml-8 flex items-center flex-col mt-4 lg:mt-0">
-                  <span className="mb-2 ">Pontos</span>
-                  <div className="flex items-center">
-                    <div className="border-2 border-gold rounded-full p-2 mr-2 bg-slate-50">
-                      <span role="img" aria-label="Points" className="text-4xl">
-                        {getTrophyIcon(userIndex)}
+                  <div className="lg:ml-8 flex items-center flex-col mt-4 lg:mt-0">
+                    <span className="mb-2 ">Pontos</span>
+                    <div className="flex items-center">
+                      <div className="border-2 border-gold rounded-full p-2 mr-2 bg-slate-50">
+                        <span role="img" aria-label="Points" className="text-4xl">
+                          {getTrophyIcon(userIndex)}
+                        </span>
+                      </div>
+                      <span className="text-5xl bg-blue-500 text-white p-2 rounded mr-10">
+                        {` ${user.ranking.totalPoints}`}
                       </span>
                     </div>
-                    <span className="text-5xl bg-blue-500 text-white p-2 rounded mr-10">
-                      {` ${user.ranking.totalPoints}`}
-                    </span>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </>
   );

@@ -17,9 +17,13 @@ import { Button } from "react-bootstrap";
 export default function Users() {
   const userService = new UserService();
   const [users, setUsers] = useState([] as User[]);
+
+
   const router = useRouter();
 
   const dispatch = useDispatch();
+  const isModalOpen = useSelector((state: any) => state.modal.isModalOpen);
+  const isEditModalOpen = useSelector((state: any) => state.editModal.isEditModalOpen);
 
   const handleOpenModal = () => dispatch(openModal());
   const handleEditOpenModal = (user: User) => {
@@ -38,14 +42,13 @@ export default function Users() {
       try {
         const response = await userService.getAll();
         setUsers(response.data);
-        console.log('users:', response.data);
       } catch (error) {
         console.error('Erro ao buscar usuários:', error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [users]);
 
 
   const calculateAge = (birthday: any) => {
@@ -56,46 +59,58 @@ export default function Users() {
 
   return (
     <>
-      <div className="mt-8 flex justify-center items-center">
-        <button
-          disabled={false}
-          className="btn btn-primary btn-lg"
-          onClick={handleOpenModal}
-        >
-          Adicionar Usuário
-        </button>
+      <div className="flex flex-col items-center justify-center mx-auto pt-8 pb-8">
+        <h1 className="text-4xl font-bold mb-4">🧑🏽‍💻 USUÁRIOS 🧑🏽‍💻</h1>
+        <div className="mt-8 flex justify-center items-center">
+          <button
+            disabled={false}
+            className="btn btn-primary btn-lg"
+            onClick={handleOpenModal}
+          >
+            Adicionar Usuário
+          </button>
+        </div>
+        <div className="container mx-auto p-4 grid grid-cols-1 mt-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          {users
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((user, index) => (
+              <div key={index} className="relative group mb-4 bg-white rounded-lg shadow-md overflow-hidden">
+                <img
+                  src={user.photo}
+                  alt={`${user.name} ${user.lastname}`}
+                  className="w-full h-80 cursor-pointer rounded-t-lg object-cover"
+                  onClick={() => handleEditOpenModal(user)}
+                />
+                <button
+                  className="absolute top-4 right-4 p-2 rounded-full bg-yellow-500 text-white"
+                  onClick={() => handleEditOpenModal(user)}
+                >
+                  <BsPencilSquare />
+                </button>
+                <div className="p-4 flex flex-col justify-center items-center">
+                  <p className="text-xl font-semibold mb-2">{`${user.name} ${user.lastname}`}</p>
+                  <p>{`Telefone: ${user.phone}`}</p>
+                  <p>{`Idade: ${calculateAge(user.birthday.toString())}`}</p>
+                  <p>{`Data de aniversário: ${format(new Date(user.birthday), 'dd/MM')}`}</p>
+                  <p>{`Setor: ${user.sector}`}</p>
+                </div>
+                <button className="w-full btn btn-primary" onClick={() => handleSendUserId(user._id)}>
+                  Adicionar métricas
+                </button>
+              </div>
+            ))}
+        </div>
+        {isModalOpen && (
+          <>
+            <CreateUserForm />
+          </>
+        )}
+        {isEditModalOpen && (
+          <>
+            <UpdateUserForm />
+          </>
+        )}
       </div>
-      <div className="container mx-auto p-4 grid grid-cols-1 mt-20 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-        {users.map((user, index) => (
-          <div key={index} className="relative group mb-4 bg-white rounded-lg shadow-md overflow-hidden">
-            <img
-              src={user.photo}
-              alt={`${user.name} ${user.lastname}`}
-              className="w-full h-80 cursor-pointer rounded-t-lg object-cover"
-              onClick={() => handleEditOpenModal(user)}
-            />
-            <button
-              className="absolute top-4 right-4 p-2 rounded-full bg-yellow-500 text-white"
-              onClick={() => handleEditOpenModal(user)}
-            >
-              <BsPencilSquare />
-            </button>
-            <div className="p-4 flex flex-col justify-center items-center">
-              <p className="text-xl font-semibold mb-2">{`${user.name} ${user.lastname}`}</p>
-              <p>{`Telefone: ${user.phone}`}</p>
-              <p>{`Idade: ${calculateAge(user.birthday.toString())}`}</p>
-              <p>{`Data de aniversário: ${format(new Date(user.birthday), 'dd/MM')}`}</p>
-              <p>{`Setor: ${user.sector}`}</p>
-            </div>
-            <button className="w-full btn btn-primary" onClick={() => handleSendUserId(user._id)}>
-              Adicionar métricas
-            </button>
-          </div>
-
-        ))}
-      </div>
-      <UpdateUserForm />
-      <CreateUserForm />
     </>
   );
 }
