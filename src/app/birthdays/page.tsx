@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import 'moment/locale/pt-br';
 
-
 export default function BirthdayList() {
   const userService = new UserService();
   const [birthdayList, setBirthdayList] = useState({} as Record<string, User[]>);
@@ -47,17 +46,19 @@ export default function BirthdayList() {
               <div className="p-4 bg-blue-500 text-white font-bold text-3xl">
                 Aniversariantes de {month}
               </div>
-              {users.map((user, index) => (
-                <div key={index} className="p-4 flex flex-col items-center">
-                  <img
-                    src={user.photo} // Certifique-se de que 'photo' é o campo correto na sua lista de usuários
-                    alt={`${user.name} ${user.lastname}`}
-                    className="rounded-full w-40 h-40 mb-4 object-cover"
-                  />
-                  <p className="text-xl font-semibold mb-2">{`${user.name} ${user.lastname}`}</p>
-                  <p>{`Data de aniversário: ${moment(user.birthday).format('DD/MM')}`}</p>
-                </div>
-              ))}
+              <div className="flex flex-wrap">
+                {users.map((user, index) => (
+                  <div key={index} className="p-4 flex flex-col items-center">
+                    <img
+                      src={user.photo} // Certifique-se de que 'photo' é o campo correto na sua lista de usuários
+                      alt={`${user.name} ${user.lastname}`}
+                      className="rounded-full w-40 h-40 mb-4 object-cover"
+                    />
+                    <p className="text-xl font-semibold mb-2">{`${user.name} ${user.lastname}`}</p>
+                    <p>{`Data de aniversário: ${moment(user.birthday).format('DD/MM')}`}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
