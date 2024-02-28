@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import { useRouter } from "next/navigation";
 import Button from '@/components/Button';
 
-
 const MetricsForm = () => {
 
   const physicalDataService = new PhysicalDataService();
