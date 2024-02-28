@@ -3,18 +3,23 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import 'bootstrap/dist/css/bootstrap.min.css';
 
-/* Adicione estilos globais abaixo desta linha */
 html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  width: auto;
+  height: auto;
 }
 
-/* Outros estilos globais podem ser adicionados abaixo desta linha */
-
 body {
-  /* Exemplo: Definir uma cor de fundo global */
+  width: auto;
   background-color: #f8f8f8;
 }
 
+.custom-modal {
+  max-width: 80%; /* Ajuste o valor conforme necessário */
+  margin: 50px auto 0;
+  overflow: auto; /* Adiciona uma margem de 50px no topo */
+}

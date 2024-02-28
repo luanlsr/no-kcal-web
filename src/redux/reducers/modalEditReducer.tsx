@@ -19,6 +19,8 @@ const editModalSlice = createSlice({
     openEditModal: (state, action: PayloadAction<User>) => {
       state.isEditModalOpen = true;
       state.userEditData = action.payload;
+      console.log('redux', action.payload);
+
     },
     closeEditModal: state => {
       state.isEditModalOpen = false;
