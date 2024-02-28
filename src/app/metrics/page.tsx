@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from "next/navigation";
 import Button from '@/components/Button';
 
-interface MetricsFormProps {
+type MetricsFormProps = {
   userId: string;
 }
 
