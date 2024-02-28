@@ -61,7 +61,7 @@ const NavbarComponent: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link href="/birthdays" onClick={toggleNav}>
+              <Link href="/birthdays">
                 <span className="nav-link text-white text-2xl">ANIVERSARIANTES</span>
               </Link>
             </li>
