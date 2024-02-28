@@ -6,10 +6,8 @@ import { PhysicalDataService } from '@/services/physicalDataService';
 import { useSelector } from 'react-redux';
 import { useRouter } from "next/navigation";
 import Button from '@/components/Button';
+import { MetricsFormProps } from '@/models/metrics';
 
-type MetricsFormProps = {
-  userId: string;
-}
 
 const MetricsForm: React.FC<MetricsFormProps> = () => {
 
