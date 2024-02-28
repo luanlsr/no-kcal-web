@@ -9,9 +9,10 @@ import { User } from "@/models/user";
 import { UserService } from "@/services/userService";
 import { openModal } from "@/redux/reducers/modalReducer";
 import { openEditModal } from "@/redux/reducers/modalEditReducer";
-import Button from "@/components/Button";
+// import Button from "@/components/Button";
 import { setUserId } from "@/redux/reducers/createMetricsReducer";
 import { useRouter } from "next/navigation";
+import { Button } from "react-bootstrap";
 
 export default function Users() {
   const userService = new UserService();
@@ -58,7 +59,7 @@ export default function Users() {
       <div className="mt-8 flex justify-center items-center">
         <button
           disabled={false}
-          className="border p-4 rounded-md bg-blue-500 text-white mt-4"
+          className="btn btn-primary btn-lg"
           onClick={handleOpenModal}
         >
           Adicionar Usuário
@@ -86,9 +87,9 @@ export default function Users() {
               <p>{`Data de aniversário: ${format(new Date(user.birthday), 'dd/MM')}`}</p>
               <p>{`Setor: ${user.sector}`}</p>
             </div>
-            <Button variant="primary" onClick={() => handleSendUserId(user._id)}>
+            <button className="w-full btn btn-primary" onClick={() => handleSendUserId(user._id)}>
               Adicionar métricas
-            </Button>
+            </button>
           </div>
 
         ))}

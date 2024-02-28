@@ -180,7 +180,7 @@ const MetricsForm = () => {
             </div>
 
             <div className="text-center">
-              <Button type="submit" variant="primary">Adicionar</Button>
+              <button value="Submit" className='btn btn-success btn-lg'>Enviar</button>
             </div>
           </Form>
         </Formik>

@@ -57,14 +57,14 @@ const NavbarComponent: React.FC = () => {
             </li>
             <li className="nav-item">
               <Link href="/users">
-                <span className="nav-link text-white text-2xl">USERS</span>
+                <span className="nav-link text-white text-2xl">USUÁRIOS</span>
               </Link>
             </li>
-            {/* <li className="nav-item">
-              <Link href="/metrics">
-                <span className="nav-link text-white text-2xl">MÉTRICAS</span>
+            <li>
+              <Link href="/birthdays" onClick={toggleNav}>
+                <span className="nav-link text-white text-2xl">ANIVERSARIANTES</span>
               </Link>
-            </li> */}
+            </li>
             <li className="nav-item">
               <Link href="/ranking">
                 <span className="nav-link text-white text-2xl">RANKING</span>
@@ -86,22 +86,22 @@ const NavbarComponent: React.FC = () => {
               <ul>
                 <li>
                   <Link href="/" onClick={toggleNav}>
-                    <span className="nav-link text-white text-4xl">HOME</span>
+                    <span className="nav-link text-white text-2xl">HOME</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="/users" onClick={toggleNav}>
-                    <span className="nav-link text-white text-4xl">USERS</span>
+                    <span className="nav-link text-white text-2xl">USUÁRIOS</span>
                   </Link>
                 </li>
-                {/* <li>
-                  <Link href="/metrics" onClick={toggleNav}>
-                    <span className="nav-link text-white text-4xl">MÉTRICAS</span>
+                <li>
+                  <Link href="/birthdays" onClick={toggleNav}>
+                    <span className="nav-link text-white text-2xl">ANIVERSARIANTES</span>
                   </Link>
-                </li> */}
+                </li>
                 <li>
                   <Link href="/ranking" onClick={toggleNav}>
-                    <span className="nav-link text-white text-4xl">RANKING</span>
+                    <span className="nav-link text-white text-2xl">RANKING</span>
                   </Link>
                 </li>
               </ul>
