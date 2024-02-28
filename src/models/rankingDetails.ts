@@ -1,14 +1,3 @@
-import { PhysicalData } from "./physicalData";
-import { RankingEntity } from "./ranking";
-import { User } from "./user";
-
-// export interface RankingDetails {
-//     id: string;
-//     user: User[];
-//     physicalData: PhysicalData;
-//     ranking: Ranking;
-// }
-
 export interface RankingDetails {
   users: [{
     _id: string;

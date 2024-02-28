@@ -49,7 +49,9 @@ const CreateUserForm = () => {
 
   const handleSubmit = async (values: any, { setSubmitting }: any) => {
     try {
-      await userService.create(values);
+      await userService.create(values)
+        .then(res => {
+        });
       handleCloseModal();
     } catch (error) {
       // Lide com erros de submissão, se necessário
@@ -141,6 +143,7 @@ const CreateUserForm = () => {
           </Form>
         </Formik>
       </Modal>
+
     </div>
   );
 };

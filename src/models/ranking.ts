@@ -1,5 +1,5 @@
 export interface RankingEntity {
-  id: string;
+  _id: string;
   userId: string;
   physicalId: string;
   date: Date;

@@ -60,11 +60,11 @@ const NavbarComponent: React.FC = () => {
                 <span className="nav-link text-white text-2xl">USERS</span>
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link href="/metrics">
                 <span className="nav-link text-white text-2xl">MÉTRICAS</span>
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link href="/ranking">
                 <span className="nav-link text-white text-2xl">RANKING</span>
@@ -89,11 +89,11 @@ const NavbarComponent: React.FC = () => {
                     <span className="nav-link text-white text-4xl">HOME</span>
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/users" onClick={toggleNav}>
                     <span className="nav-link text-white text-4xl">USERS</span>
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link href="/metrics" onClick={toggleNav}>
                     <span className="nav-link text-white text-4xl">MÉTRICAS</span>
