@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectPathname, updatePathname } from '@/redux/reducers/routerReducer';
 
 const NavbarComponent: React.FC = () => {
   const [isNavOpen, setNavOpen] = useState(false);
+  const dispatch = useDispatch();
+  const pathname = useSelector(selectPathname);
 
   const toggleNav = () => {
     setNavOpen(!isNavOpen);
@@ -22,8 +26,15 @@ const NavbarComponent: React.FC = () => {
     };
   }, [isNavOpen]);
 
+  const handleLinkClick = (path: any) => {
+    dispatch(updatePathname(path));
+    toggleNav();
+  };
+  console.log('pathname', pathname);
+
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-yellow-500">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-amber-500">
       <div className="container">
         <div className="d-flex align-items-center">
           <Link href="/">
@@ -48,28 +59,18 @@ const NavbarComponent: React.FC = () => {
         </button>
 
         {/* Large Screen Menu */}
-        <div className={`ml-4 ${isNavOpen ? 'd-none d-lg-none' : 'd-none d-lg-block'}`} id="navbarNav">
+        <div className={`ml-4 ${isNavOpen ? 'hidden lg:hidden' : 'hidden lg:block'}`} id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link href="/">
-                <span className="nav-link text-white text-2xl">HOME</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/users">
-                <span className="nav-link text-white text-2xl">USUÁRIOS</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/birthdays">
-                <span className="nav-link text-white text-2xl">ANIVERSARIANTES</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/ranking">
-                <span className="nav-link text-white text-2xl">RANKING</span>
-              </Link>
-            </li>
+            {menuItems.map((menuItem) => (
+              <li className="nav-item" key={menuItem.path}>
+                <Link href={menuItem.path}>
+                  <span className={`nav-link text-2xl text-slate-800 ${pathname === menuItem.path ? 'font-bold text-cyan-500' : ''
+                    }`}>
+                    {menuItem.label}
+                  </span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -84,26 +85,16 @@ const NavbarComponent: React.FC = () => {
             </button>
             <div className="menu-content">
               <ul>
-                <li>
-                  <Link href="/" onClick={toggleNav}>
-                    <span className="nav-link text-white text-2xl">HOME</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/users" onClick={toggleNav}>
-                    <span className="nav-link text-white text-2xl">USUÁRIOS</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/birthdays" onClick={toggleNav}>
-                    <span className="nav-link text-white text-2xl">ANIVERSARIANTES</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/ranking" onClick={toggleNav}>
-                    <span className="nav-link text-white text-2xl">RANKING</span>
-                  </Link>
-                </li>
+                {menuItems.map((menuItem) => (
+                  <li key={menuItem.path}>
+                    <Link href={menuItem.path} onClick={toggleNav}>
+                      <a className={`nav-link text-white text-2xl ${pathname === menuItem.path ? 'font-bold' : ''
+                        }`} onClick={() => handleLinkClick(menuItem.path)}>
+                        {menuItem.label}
+                      </a>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -152,9 +143,22 @@ const NavbarComponent: React.FC = () => {
           font-size: 2rem;
           color: white;
         }
+        @media (min-width: 992px) {
+          .navbar-nav .font-bold {
+            // Adicione seus estilos para o item de menu ativo em telas grandes aqui
+            color: #ffffff; // Mude para a cor desejada
+          }
+        }
       `}</style>
     </nav>
   );
 };
+
+const menuItems = [
+  { path: '/', label: 'HOME' },
+  { path: '/users', label: 'USUÁRIOS' },
+  { path: '/birthdays', label: 'ANIVERSARIANTES' },
+  { path: '/ranking', label: 'RANKING' },
+];
 
 export default NavbarComponent;

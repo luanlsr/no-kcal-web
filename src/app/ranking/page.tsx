@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import Button from "@/components/Button";
 import { RankingDetails } from "@/models/rankingDetails";
 import { RankingDetailsService } from "@/services/rankingDetailsService";
+import { useDispatch } from "react-redux";
+import { updatePathname } from "@/redux/reducers/routerReducer";
 
 export default function Ranking() {
   const rankingDetailsService = new RankingDetailsService();
   const [rankingDetails, setRankingDetails] = useState([] as RankingDetails[]);
+  const dispatch = useDispatch();
 
   const usersMap = rankingDetails
     ? rankingDetails.map((item) => item.users[0]).sort((a, b) => b.ranking.monthlyPoints - a.ranking.monthlyPoints)
@@ -23,6 +26,8 @@ export default function Ranking() {
   };
 
   useEffect(() => {
+    dispatch(updatePathname('/ranking'));
+
     rankingDetailsService.getAll()
       .then((res) => {
         setRankingDetails(res.data);

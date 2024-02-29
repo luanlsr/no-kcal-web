@@ -4,14 +4,18 @@ import { UserService } from "@/services/userService";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import 'moment/locale/pt-br';
+import { useDispatch } from "react-redux";
+import { updatePathname } from "@/redux/reducers/routerReducer";
 
 export default function BirthdayList() {
   const userService = new UserService();
   const [birthdayList, setBirthdayList] = useState({} as Record<string, User[]>);
+  const dispatch = useDispatch();
 
   moment.locale('pt-br');
 
   useEffect(() => {
+    dispatch(updatePathname('/birthdays'));
     const fetchData = async () => {
       try {
         const response = await userService.getAll();

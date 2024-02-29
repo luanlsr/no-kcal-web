@@ -12,7 +12,7 @@ import { openEditModal } from "@/redux/reducers/modalEditReducer";
 // import Button from "@/components/Button";
 import { setUserId } from "@/redux/reducers/createMetricsReducer";
 import { useRouter } from "next/navigation";
-import { Button } from "react-bootstrap";
+import { updatePathname } from "@/redux/reducers/routerReducer";
 
 export default function Users() {
   const userService = new UserService();
@@ -38,6 +38,7 @@ export default function Users() {
   };
 
   useEffect(() => {
+    dispatch(updatePathname('/users'));
     const fetchData = async () => {
       try {
         const response = await userService.getAll();
@@ -46,6 +47,7 @@ export default function Users() {
         console.error('Erro ao buscar usuários:', error);
       }
     };
+
 
     fetchData();
   }, [users]);
