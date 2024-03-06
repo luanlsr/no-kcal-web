@@ -51,17 +51,21 @@ export default function BirthdayList() {
                 Aniversariantes de {month}
               </div>
               <div className="flex flex-wrap">
-                {users.map((user, index) => (
-                  <div key={index} className="p-4 flex flex-col items-center">
-                    <img
-                      src={user.photo} // Certifique-se de que 'photo' é o campo correto na sua lista de usuários
-                      alt={`${user.name} ${user.lastname}`}
-                      className="rounded-full w-40 h-40 mb-4 object-cover"
-                    />
-                    <p className="text-xl font-semibold mb-2">{`${user.name} ${user.lastname}`}</p>
-                    <p>{`Data de aniversário: ${moment(user.birthday).format('DD/MM')}`}</p>
-                  </div>
-                ))}
+                {users.map((user, index) => {
+                  const formattedBirthday = user.birthday.toString().slice(8, 10) + "/" + user.birthday.toString().slice(5, 7) + "/" + user.birthday.toString().slice(0, 4);
+                  return (
+                    <div key={index} className="p-4 flex flex-col items-center">
+                      <img
+                        src={user.photo} // Certifique-se de que 'photo' é o campo correto na sua lista de usuários
+                        alt={`${user.name} ${user.lastname}`}
+                        className="rounded-full w-40 h-40 mb-4 object-cover"
+                      />
+                      <p className="text-xl font-semibold mb-2">{`${user.name} ${user.lastname}`}</p>
+                      <p>{`Data de aniversário: ${formattedBirthday}`}</p>
+                    </div>
+
+                  )
+                })}
               </div>
             </div>
           ))}

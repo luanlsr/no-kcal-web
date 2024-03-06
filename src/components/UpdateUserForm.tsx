@@ -92,7 +92,7 @@ const UpdateUserForm = () => {
                         {...field}
                         type="date"
                         className="border rounded-md py-2 px-3 w-full"
-                        value={moment(field.value).format('YYYY-MM-DD')}
+                        value={moment(field.value).utc().format('YYYY-MM-DD')}
                       />
                     )}
                   />
